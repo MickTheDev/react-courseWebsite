@@ -19,6 +19,7 @@ function Popular() {
       return (
         <div key={recipe.id}>
             <p>{recipe.title}</p>
+            <p>dawdaw</p>
             {/* 26:30 */}
         </div>
       );
