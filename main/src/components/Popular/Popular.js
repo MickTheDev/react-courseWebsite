@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+import '@splidejs/splide/dist/css/splide.min.css'
 
 function Popular() {
   const [popular, setPopular] = useState([])
@@ -13,18 +16,71 @@ function Popular() {
     )
     const data = await api.json()
     setPopular(data.recipes)
+    console.log(data)
   }
-  return <div>
-    {popular.map((recipe) => {
-      return (
-        <div key={recipe.id}>
-            <p>{recipe.title}</p>
-            <p>dawdaw</p>
-            {/* 26:30 */}
-        </div>
-      );
-    })}
-  </div>
+  return (
+    <Wrapper>
+      <h3>Popular Picks</h3>
+
+      <Splide options={{
+        perPage: 3,
+        arrows: false,
+        pagination: false,
+        drag: 'free',
+        gap: '5rem'
+      }}>
+        {popular.map((recipe) => {
+          return (
+            <SplideSlide>
+              <Card>
+                <p>{recipe.title}</p>
+                <img src={recipe.image} alt={recipe.title} />
+              </Card>
+            </SplideSlide>
+          )
+        })}
+      </Splide>
+    </Wrapper>
+  )
 }
+
+const Wrapper = styled.div`
+  margin: 4rem 0rem;
+`
+
+const Card = styled.div`
+  min-height: 25rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    border-radius 2rem;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  p {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .2);
+  }
+`
+
+// 39:30
 
 export default Popular
