@@ -33,7 +33,7 @@ function Popular() {
       <h3>Popular Picks</h3>
 
       <Splide options={{
-        perPage: 3,
+        perPage: 4,
         arrows: false,
         pagination: false,
         drag: 'free',
@@ -101,5 +101,3 @@ const Gradient = styled.div`
 `
 
 export default Popular
-
-// 44:30
