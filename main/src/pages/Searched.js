@@ -54,4 +54,4 @@ const Card = styled.div`
 
 export default Searched
 
-// 1:45
+// 1:45:
