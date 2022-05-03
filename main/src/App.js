@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Search /> 
+        <Search />  
         <Category />
         <Pages />
       </BrowserRouter>
