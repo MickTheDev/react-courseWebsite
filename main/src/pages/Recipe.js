@@ -6,7 +6,6 @@ function Recipe() {
   let params = useParams()
   const [details, setDetails] = useState({})
   const [activeTab, setActiveTab] = useState('instructions')
-  let ingredients = details.extendedIngredients
 
   const fetchDetails = async () => {
     const data = await fetch(
@@ -14,7 +13,7 @@ function Recipe() {
     )
     const detailData = await data.json()
     setDetails(detailData)
-    console.log(details.extendedIngredients)
+    console.log(detailData.extendedIngredients)
   }
 
   useEffect(() => {
@@ -40,15 +39,19 @@ function Recipe() {
         >
           Ingredients
         </Button>
-        <div>
-          <h3 dangerouslySetInnerHTML={{ __html: details.summary }}>{}</h3>
-          <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
-        </div>
-        <ul>
-          {/* {details.extendedIngredients.map((item) => (
-            console.log('test')
-          ))} */}
-        </ul>
+        {activeTab === 'instructions' && (
+          <div>
+            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}>{}</h3>
+            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+          </div>
+        )}
+        {activeTab === 'ingredients' && (
+          <ul>
+            {details.extendedIngredients.map((ingredient) => (
+              <li key={ingredient.id}>{ingredient.original}</li>
+            ))}
+          </ul>
+        )}
       </Info>
     </DetailWrapper>
   )
